@@ -329,11 +329,11 @@ public:
 	// Functions for setting up the Arduino
 	/////////////////////////////////////////////////////////////////////////////////////
 	MFRC522(const byte chipSelectPin, const byte resetPowerDownPin,
-			/*SPIClass _spiClass,//  Update for Argon: Removed param */
-			const SPISettings spiSettings = SPISettings(SPI_CLOCK_DIV4, MSBFIRST, SPI_MODE0))
+					SPIClass &_spiClass = SPI, //  Update for Photon2 - allow SPI class to be passed in
+					const SPISettings spiSettings = SPISettings(SPI_CLOCK_DIV4, MSBFIRST, SPI_MODE0))
 			: _chipSelectPin(chipSelectPin), _resetPowerDownPin(resetPowerDownPin),
-			 /* _spiClass(_spiClass), // Update for Argon; Hardcoded to SPI */
-			  _spiClass(SPI), _spiSettings(spiSettings) {};
+				_spiClass(_spiClass),
+				_spiClass(SPI), _spiSettings(spiSettings){};
 	MFRC522() : MFRC522(UNUSED_PIN, UNUSED_PIN) {};
 	
 	/////////////////////////////////////////////////////////////////////////////////////
